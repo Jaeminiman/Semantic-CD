@@ -1,0 +1,22 @@
+# Sam setting
+sam_checkpoint: /workspace/Laboratory/04.model/segment_anything1/sam_vit_h_4b8939.pth
+model_type: vit_h
+device: cuda
+res_embed: 64
+res_sam: 1024
+threshold_cos_sim: 0.61
+
+# Object Detection setting
+od_model: "yolo" # yolo or grounding_dino
+od_target_classes: "materials. equipment. structure"
+od_pred_score_thr: 0.25
+od_iou_thr: 0.7
+od_checkpoint: "/workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Naju_90m_ChangeDetection_workspace/trial5/YOLO/full_1280/weights/best.pt" 
+od_save_dir: "/workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Naju_90m_ChangeDetection_workspace/trial5/YOLO/outputs"
+od_config: "/workspace/Data/240617_NajooGwangjoo/object_detection_dataset/earthwork_90m_nerf_cd_pair/split/data.yaml" # YOLO -> data.yaml / mmdetection -> config file
+
+# Image pair
+image_pair_resize_factor: 4
+
+image_dir: /workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Naju_90m_ChangeDetection_workspace/trial5/CD_PAIR/test2/nerf_cd_pair/raw
+output_dir: /workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Naju_90m_ChangeDetection_workspace/trial5/CD_PAIR/test2/outputs/pred

@@ -1,0 +1,115 @@
+# Additional explanations:
+# 신탄진 50m TRIAL1 (Long grid(t1) + Short grid(t2))
+# 1. refine_sfm 추가 (initial/new 모두에 대해 기존에는 적용안되고 있었음)
+     # 특히, initial의 경우 bundle_adjustment이 적용되지 않았음.
+# 2. best_recon_dir을 sparse/0 가 되도록 설계(NeRF 학습 시, 안좋은 sparse/0가 직접적으로 활용되었던 것 같음)
+# 3. image_start 추가로 인해 test dataset 만들기 용이
+
+init_settings:
+  input_type: 'video'  # 'video' or 'image'
+  input_dir: '/workspace/Data/Sintanjin/241016-241017_sintanjin/241016/50m_90deg_longGrid'
+  base_workspace_dir: '/workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Sintanjin_50m_CD_workspace'
+  trial_num: 'longshort_trial1'
+  image_size: null  # Set to null to maintain original size, e.g., [1280, 720]
+  image_start: 0
+  image_step: 120
+  image_ext: '.jpg'  
+  is_gps: 1 # 1 (if use gps coordinate) 0 (no gps)
+  prefix: ""
+  phase: 'initial'
+
+
+# new image processing settings
+correspondence_settings:
+  input_type: 'video'  # 'video' or 'image'
+  input_dir: '/workspace/Data/Sintanjin/241016-241017_sintanjin/241017/50m_90deg_shortGrid' 
+  base_workspace_dir: '/workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Sintanjin_50m_CD_workspace'
+  trial_num: 'longshort_trial1'
+  image_size: null   # Set to null to maintain original size, e.g., [1280, 720]
+  image_start: 60
+  image_step: 120
+  image_ext: '.jpg'
+  is_gps: 1 # 1 (if use gps coordinate) 0 (no gps)
+  prefix: "" # newly added images's prefix for name (gps-based -> "")
+  phase: 'new'
+
+  feature_extractor: 
+    ImageReader.single_camera: "1" 
+    ImageReader.camera_model: "OPENCV" 
+    SiftExtraction.use_gpu: "1"
+    SiftExtraction.gpu_index: "0,1" # Multi-gpu(0,1)
+    SiftExtraction.estimate_affine_shape: "0"
+    SiftExtraction.domain_size_pooling: "1" 
+    SiftExtraction.max_image_size: 2400
+    SiftExtraction.max_num_features: 15000
+
+    
+  vocab_tree_matcher:
+    VocabTreeMatching.vocab_tree_path: '/home/wpals113/.local/share/nerfstudio/vocab_tree.fbow'    
+    VocabTreeMatching.num_images: 100
+  
+  feature_matcher:
+    SiftMatching.use_gpu: "1"
+    SiftMatching.gpu_index: "1" # Multi-gpu(0,1)    
+    SiftMatching.max_ratio: 0.7
+    SiftMatching.guided_matching: "1" 
+
+# NeRF settings
+
+nerf_settings:    
+
+  ns_process_options:
+    # Basic Properties
+    basic_properties:
+      verbose: True
+    # Feature Extraction
+    feature_extractor:
+      max_image_size: 2400
+      max_num_features: 15000      
+      estimate_affine_shape: False
+      domain_size_pooling: True
+    # Feature Matching
+    feature_matcher:
+      matching_method: "vocab_tree"        
+      max_ratio: 0.7
+      gpu_index: "0,1"    
+      guided_matching: True
+      tri_min_angle: "1.0"
+  
+  # Geo-registration
+  geo_registration:
+    colmap_model_path: "colmap/sparse/geo-registration/ecef"  # If is_gps: 1, check it
+    align_ransac_max_error: "3.0"
+    
+  ns_train_options:
+    nerf_model: "nerfacto"
+
+    train_options:            
+      machine.num-devices: "2"
+      machine.device-type: "cuda"
+      pipeline.model.camera-optimizer.mode: "off"    
+      pipeline.model.predict-normals: "True"
+      pipeline.datamanager.train-num-rays-per-batch: "4096"
+      viewer.jpeg-quality: "100"
+      viewer.make-share-url: "False"    
+      vis: "viewer+tensorboard"
+    
+    dataparser_model: "nerfstudio-data" # GPS -> colmap / defaults: nerfstudio-data    
+    dataparser_options:      
+      downscale-factor: 1
+
+    dataparser_colmap_options:
+      # assume-colmap-world-coordinate-convention: "False" # COLMAP -> NeRFStudio (GPS)
+      # orientation-method: "none" # NeRFStudio -> Web-GUI (GPS)
+      # center-method: "none" # NeRFStudio -> Web-GUI (GPS)
+      # auto-scale-poses : "False" # (GPS)
+      colmap_path: "colmap/sparse/geo-registration/ecef" 
+    
+ns_render_settings:
+  output_format: "images"
+  load_config: "/workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Sintanjin_50m_CD_workspace/longtshort_trial1/initial/nerf_output/ns_processed/nerfacto/2025-04-19_103212/config.yml"
+  camera_path_filename: "/workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Sintanjin_50m_CD_workspace/longtshort_trial1/new/ns_processed/camera_path.json"
+  output_path: "/workspace/Laboratory/02.Rapid3DReconstruction/00.workspace/Sintanjin_50m_CD_workspace/longtshort_trial1/new/renders"
+
+
+  
