@@ -1,8 +1,0 @@
-setup.py
-R3DR.egg-info/PKG-INFO
-R3DR.egg-info/SOURCES.txt
-R3DR.egg-info/dependency_links.txt
-R3DR.egg-info/entry_points.txt
-R3DR.egg-info/top_level.txt
-process/__init__.py
-process/rectify.py

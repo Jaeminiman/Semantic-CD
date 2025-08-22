@@ -13,7 +13,7 @@ import argparse
 
 from segment_anything import SamPredictor, SamAutomaticMaskGenerator, sam_model_registry
 from ObjectDetector import YOLODetector, MMDetDetector
-from R3DR.utils import dir_utils
+from SCD.utils import dir_utils
 
 from image_pair import ImagePair
 from object_detection_utils import *

@@ -1,0 +1,5 @@
+[console_scripts]
+SCD-correspondence = SCD.script.nerf_correspondence:main
+SCD-init = SCD.script.nerf_initialization:main
+SCD-process-t2 = SCD.script.nerf_process_t2:main
+SCD-render = SCD.script.render:main

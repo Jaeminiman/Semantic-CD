@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Union, Dict, Any
 from ultralytics import YOLO
-from mmdet.apis import DetInferencer
+# from mmdet.apis import DetInferencer
 import re
 import yaml
 

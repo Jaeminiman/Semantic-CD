@@ -1,0 +1,13 @@
+README.md
+setup.py
+SCD/__init__.py
+SCD.egg-info/PKG-INFO
+SCD.egg-info/SOURCES.txt
+SCD.egg-info/dependency_links.txt
+SCD.egg-info/entry_points.txt
+SCD.egg-info/top_level.txt
+SCD/script/__init__.py
+SCD/script/nerf_correspondence.py
+SCD/script/nerf_initialization.py
+SCD/script/nerf_process_t2.py
+SCD/script/render.py

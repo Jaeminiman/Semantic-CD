@@ -1,5 +1,5 @@
 # Sam setting
-sam_checkpoint: ../../../../Laboratory/04.model/segment_anything1/sam_vit_h_4b8939.pth
+sam_checkpoint: ../../../../model/segment_anything1/sam_vit_h_4b8939.pth
 model_type: vit_h
 device: cuda
 res_embed: 64
