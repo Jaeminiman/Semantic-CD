@@ -11,12 +11,12 @@ od_model: "yolo" # yolo or grounding_dino
 od_target_classes: "materials"
 od_pred_score_thr: 0.5
 od_iou_thr: 0.35
-od_checkpoint: ../../../../Laboratory/02.Rapid3DReconstruction/00.workspace/Duraemidam_ChangeDetection_workspace/trial4/YOLO/full_1280/weights/best.pt
-od_save_dir: ../../../../Laboratory/02.Rapid3DReconstruction/00.workspace/Duraemidam_ChangeDetection_workspace/trial4/YOLO/outputs
-od_config: ../../../../Data/240508_SNU-Duraemidam/ObjectDetection/25-1_ChangeDetection/split/data.yaml # YOLO -> data.yaml / mmdetection -> config file
+od_checkpoint: ../../../../workspace/Duraemidam_ChangeDetection_workspace/trial4/YOLO/full_1280/weights/best.pt
+od_save_dir: ../../../../workspace/Duraemidam_ChangeDetection_workspace/trial4/YOLO/outputs
+od_config: ../../../../data/240508_SNU-Duraemidam/ObjectDetection/25-1_ChangeDetection/split/data.yaml # YOLO -> data.yaml / mmdetection -> config file
 
 # Image pair
 image_pair_resize_factor: 4
 
-image_dir: ../../../../Laboratory/02.Rapid3DReconstruction/00.workspace/Duraemidam_ChangeDetection_workspace/trial4/CD_PAIR/test2/nerf_cd_pair/raw
-output_dir: ../../../../Laboratory/02.Rapid3DReconstruction/00.workspace/Duraemidam_ChangeDetection_workspace/trial4/CD_PAIR/test2/outputs/pred
+image_dir: ../../../../workspace/Duraemidam_ChangeDetection_workspace/trial4/CD_PAIR/test2/nerf_cd_pair/raw
+output_dir: ../../../../workspace/Duraemidam_ChangeDetection_workspace/trial4/CD_PAIR/test2/outputs/pred
