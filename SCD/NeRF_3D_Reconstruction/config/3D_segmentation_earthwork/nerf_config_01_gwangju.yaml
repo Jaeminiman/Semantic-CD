@@ -8,8 +8,8 @@
 
 init_settings:
   input_type: 'image'  # 'video' or 'image'
-  input_dir: ../../../../data/01.20240617_강진광주/01.raw_data
-  base_workspace_dir: ../../../../workspace/3D_segmentation_earthwork/01.20240617_강진광주
+  input_dir: ./data/01_20240617_gwangju/01_raw_data
+  base_workspace_dir: ./workspace/3D_segmentation_earthwork/01_20240617_gwangju
   trial_num: 'trial1'
   image_size: null  # Set to null to maintain original size, e.g., [1280, 720]
   image_start: 0
@@ -65,17 +65,17 @@ nerf_settings:
       verbose: True
     # Feature Extraction
     feature_extractor:
-      max_image_size: 2400
-      max_num_features: 15000      
-      estimate_affine_shape: False
-      domain_size_pooling: True
+      # max_image_size: 2400
+      # max_num_features: 15000      
+      # estimate_affine_shape: False
+      # domain_size_pooling: True
     # Feature Matching
     feature_matcher:
       matching_method: "vocab_tree"        
-      max_ratio: 0.7
-      gpu_index: "0,1"    
-      guided_matching: True
-      tri_min_angle: "1.0"
+      # max_ratio: 0.7
+      # gpu_index: "0,1"    
+      # guided_matching: True
+      # tri_min_angle: "1.0"
   
   # Geo-registration
   geo_registration:

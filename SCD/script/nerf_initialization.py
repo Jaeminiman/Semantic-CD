@@ -45,7 +45,7 @@ def ns_process_bool_parser(option: str) -> List[str]:
 def ns_process_command_parser(image_dir: Path, ns_processed_dir: Path, nerf_config: Dict) -> List[str]:
     
     ns_process_config = nerf_config.get('ns_process_options', {})
-        
+    
     # Check if the 'ns_process_options' key exists in the config
     if not ns_process_config:
         raise ValueError("Missing 'ns_process_options' in nerf_config.")
@@ -58,6 +58,9 @@ def ns_process_command_parser(image_dir: Path, ns_processed_dir: Path, nerf_conf
     ]
 
     for k, v in ns_process_config.items():
+        if v is None:
+            continue
+
         for key, value in v.items():
             # If the value is a boolean, add the corresponding boolean flag
             if isinstance(value, bool):
@@ -120,7 +123,10 @@ def run_nerf_process(image_dir: Path, workspace_dir: Path, config: Dict, is_gps:
         # Task 1. Data processing with COLMAP
         start_time = time.time()
         if dir_utils.is_dir_empty(ns_processed_dir):            
- 
+                        
+            if dir_utils.is_dir_empty(image_dir):                                  
+                dir_utils.prepare_processed_images(image_dir)
+
             ns_process_command = ns_process_command_parser(image_dir, ns_processed_dir, nerf_config)
             
             logging.info(f"Running the command: {' '.join(ns_process_command)}")
@@ -176,8 +182,8 @@ def main() -> None:
     workspace_dir = dir_utils.get_workspace_dir(init_config)
 
     # Task 0. Copy config into workspace
-    config_dir = workspace_dir / "config"
-    config_dir.mkdir(parents=True, exist_ok=True)  # 디렉토리가 없으면 생성
+    config_dir = workspace_dir / "config"        
+    config_dir.mkdir(parents=True, exist_ok=False)  # 디렉토리가 없으면 생성
     shutil.copy2(args.config, config_dir / "config.yaml")  # Copy the config file to the workspace
 
     # Task 1: Process input data

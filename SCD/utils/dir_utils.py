@@ -7,6 +7,48 @@ import yaml
 from PIL import Image
 import cv2
 
+def prepare_processed_images(base_dir_path: str):
+    """
+    Prepare a 'processed' folder inside the given base image directory.
+    If it does not exist, traverse all subfolders under base_dir_path,
+    collect image files, and copy them into 'processed'.
+    
+    Args:
+        base_dir_path (str): Path to the base directory (e.g., "../../../../data/.../01_raw_data")
+    """
+    base_dir = Path(base_dir_path)
+    
+    processed_dir = base_dir / "processed"    
+    
+    # Supported image extensions
+    image_exts = {".jpg", ".jpeg", ".png"}
+
+    if not processed_dir.exists():
+        print(f"'{processed_dir}' does not exist. Creating folder and copying images...")
+
+        # Create processed folder
+        processed_dir.mkdir(parents=True, exist_ok=True)
+
+        # Traverse all subdirectories and copy images
+        for root, _, files in os.walk(base_dir):
+            for file in files:
+                if Path(file).suffix.lower() in image_exts:
+                    src_path = Path(root) / file
+                    dst_path = processed_dir / file
+
+                    # Avoid overwriting files with the same name
+                    counter = 1
+                    while dst_path.exists():
+                        dst_path = processed_dir / f"{Path(file).stem}_{counter}{Path(file).suffix}"
+                        counter += 1
+
+                    shutil.copy2(src_path, dst_path)
+                    print(f"Copied: {src_path} → {dst_path}")
+
+        print("✅ All images have been copied successfully.")
+    else:
+        print(f"'{processed_dir}' already exists.")
+
 # Copy colmap data, including subdirectories
 def copy_all(src: Path, dest: Path) -> None:
     for item in src.iterdir():

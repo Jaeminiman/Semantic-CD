@@ -51,7 +51,7 @@ def process_input_data(config: Dict) -> Path:
             )
         else:            
             logging.info("Using image directory. Copy from source to workspace")                                  
-            dir_utils.copy_images(input_dir, image_dir)            
+            dir_utils.prepare_processed_images(input_dir)            
     else:
         logging.warn(f"{image_dir} is not empty, leading to skip processing input")
 
