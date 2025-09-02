@@ -12,9 +12,9 @@ from typing import Dict, Tuple, List
 import yaml
 import shutil
 
-from R3DR.utils.input_processing_utils import process_input_data
-from R3DR.utils import dir_utils
-from R3DR.utils import colmap_utils
+from SCD.utils.input_processing_utils import process_input_data
+from SCD.utils import dir_utils
+from SCD.utils import colmap_utils
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 

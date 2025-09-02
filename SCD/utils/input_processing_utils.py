@@ -7,7 +7,7 @@ import pysrt
 import piexif
 from fractions import Fraction
 from itertools import chain
-from R3DR.utils import dir_utils
+from SCD.utils import dir_utils
 
 def process_video(video_dir: Path, image_dir: Path, image_size: Tuple[int, int], image_start: int, image_step: int, image_ext: str, is_gps: int) -> Path:
     """Process video and extract images."""        
