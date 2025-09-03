@@ -183,7 +183,7 @@ def main() -> None:
 
     # Task 0. Copy config into workspace
     config_dir = workspace_dir / "config"        
-    config_dir.mkdir(parents=True, exist_ok=False)  # 디렉토리가 없으면 생성
+    config_dir.mkdir(parents=True, exist_ok=True)  # 디렉토리가 없으면 생성
     shutil.copy2(args.config, config_dir / "config.yaml")  # Copy the config file to the workspace
 
     # Task 1: Process input data
