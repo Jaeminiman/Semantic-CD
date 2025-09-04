@@ -1,10 +1,4 @@
 # Additional explanations:
-# 두레미담 30m TRIAL4
-# 1. refine_sfm 추가 (initial/new 모두에 대해 기존에는 적용안되고 있었음)
-     # 특히, initial의 경우 bundle_adjustment이 적용되지 않았음.
-# 2. best_recon_dir을 sparse/0 가 되도록 설계(NeRF 학습 시, 안좋은 sparse/0가 직접적으로 활용되었던 것 같음)
-# 3. image_start 추가로 인해 test dataset 만들기 용이
-
 
 init_settings:
   input_type: 'image'  # 'video' or 'image'
@@ -86,7 +80,7 @@ nerf_settings:
     nerf_model: "nerfacto"
 
     train_options:            
-      machine.num-devices: "2"
+      machine.num-devices: "1"
       machine.device-type: "cuda"
       pipeline.model.camera-optimizer.mode: "off"    
       pipeline.model.predict-normals: "True"
