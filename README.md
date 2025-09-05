@@ -111,7 +111,7 @@ SCD-init --config /root/code/Semantic-CD/SCD/NeRF_3D_Reconstruction/config/3D_se
 
 ### YOLO-SAM Semantic Change Detection Framework
 
-![Pipeline](./YOLO-SAM-cd_framework.png)
+<img width="750" height="375" alt="YOLO-SAM-cd_framework" src="https://github.com/user-attachments/assets/a6669a81-2263-4b53-ab3f-a41fb38d3473" />
 
 Our framework integrates **change detection** and **semantic segmentation**, and consists of the following **three stages**:
 
@@ -148,7 +148,7 @@ Our framework integrates **change detection** and **semantic segmentation**, and
 
 ### Semantic Change Detection(Classification)
 
-![Semantic Segmentation Example](./831be388-ea44-491c-9cb6-d7bf839bf55c.png)
+<img width="600" height="400" alt="Semantic-CD 실험 결과 2" src="https://github.com/user-attachments/assets/e3c8f8fd-d69e-4519-b045-c667bbc8612f" />
 
 * **materials** (yellow)
 * **structure** (green)
@@ -158,7 +158,7 @@ Our framework integrates **change detection** and **semantic segmentation**, and
 
 ### Semantic Change Detection(Appearance/Removal)
 
-![Semantic Change Detection Example](./9349d703-5ecc-430e-859b-6cccd26eb668.png)
+<img width="600" height="400" alt="Semantic-CD 실험 결과 1" src="https://github.com/user-attachments/assets/1a9eeb99-c6f8-4d40-8281-963e03be3b7e" />
 
 * **appearance** (blue)
 * **removal** (red)
