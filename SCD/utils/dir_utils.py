@@ -31,6 +31,9 @@ def prepare_processed_images(base_dir_path: str):
 
         # Traverse all subdirectories and copy images
         for root, _, files in os.walk(base_dir):
+            if Path(root) == processed_dir:
+                continue  # pass the processed dir
+
             for file in files:
                 if Path(file).suffix.lower() in image_exts:
                     src_path = Path(root) / file
