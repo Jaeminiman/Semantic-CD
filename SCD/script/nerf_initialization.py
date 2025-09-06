@@ -144,9 +144,9 @@ def run_nerf_process(image_dir: Path, workspace_dir: Path, config: Dict, is_gps:
         if is_gps and dir_utils.is_dir_empty(ns_processed_dir / colmap_model_path) :
             
             logging.info("Geo-resgistration in COLMAP using GPS data...")
-            # ransac_thr = float(nerf_config['geo_registration']['align_ransac_max_error'])
+            ransac_thr = float(nerf_config['geo_registration']['align_ransac_max_error'])
 
-            colmap_utils.geo_registration(image_dir, ns_processed_dir, colmap_model_path)
+            colmap_utils.geo_registration(image_dir, ns_processed_dir, colmap_model_path, ransac_thr)
 
             # Save transforms.json in ecef coordinate -> transforms.json은 그냥 no gps와 맞추기.(정밀도 문제)
             # process_command.extend(["--skip_image_processing"])

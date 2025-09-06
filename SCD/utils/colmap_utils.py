@@ -689,7 +689,7 @@ def generate_geo_registration_txt(image_dir: Path, output_dir: Path) -> None:
                 print(f"No GPS data found for {file_path.name}")
 
 
-def geo_registration(image_dir: Path, ns_processed_dir: Path, colmap_model_path: str):
+def geo_registration(image_dir: Path, ns_processed_dir: Path, colmap_model_path: str, ransac_thr: float):
     absolute_default_colmap_path = ns_processed_dir / "colmap/sparse/0"
     absolute_colmap_model_path = ns_processed_dir / colmap_model_path    
     absolute_colmap_model_path.mkdir(parents=True, exist_ok=True)
@@ -707,7 +707,8 @@ def geo_registration(image_dir: Path, ns_processed_dir: Path, colmap_model_path:
         "--ref_is_gps", "1",
         "--alignment_type", "ecef",
         "--transform_path", str(absolute_colmap_model_path / "sim3_transform.json"),
-        # "--alignment_max_error", str(ransac_thr)
+        "--robust_alignment", "1",
+        "--robust_alignment_max_error", str(ransac_thr)
     ]
 
     run_command(colmap_command)

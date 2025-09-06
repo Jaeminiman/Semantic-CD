@@ -10,7 +10,7 @@ init_settings:
   image_size: null  # Set to null to maintain original size, e.g., [1280, 720]
   image_start: 0
   image_step: 120
-  image_ext: '.jpg'  
+  image_ext: '.JPG'  
   is_gps: 1 # 1 (if use gps coordinate) 0 (no gps)
   prefix: ""
   phase: 'initial'
