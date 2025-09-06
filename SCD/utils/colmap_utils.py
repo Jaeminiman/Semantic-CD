@@ -677,7 +677,7 @@ def generate_geo_registration_txt(image_dir: Path, output_dir: Path) -> None:
     with open(str(output_dir / "geo-registration-list.txt"), 'w') as f:
         for i, file_path in enumerate(image_files):
             # Generate new file name (확장자 유지)
-            new_file_name = f"frame_{i+1:05d}{file_path.suffix.lower()}"
+            new_file_name = f"frame_{i+1:05d}{file_path.suffix}"
             
             # Extract GPS data
             lat, lon, alt = extract_gps_from_exif(file_path)
