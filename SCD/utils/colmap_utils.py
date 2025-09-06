@@ -717,7 +717,7 @@ def geo_registration(image_dir: Path, ns_processed_dir: Path, colmap_model_path:
 
 def convert_poses_t2_to_t1_with_gps(sim3_t1_path, sim3_t2_path, input_colmap2_path, output_colmap1_path):
 
-    # Load Sim(3) transforms (from colmap to ECEF)
+    # Load Sim(3) transforms (from colmap to ECEF) 
     s_ecef_colmap1, R_ecef_colmap1, t_ecef_colmap1 = load_sim3(sim3_t1_path)
     s_ecef_colmap2, R_ecef_colmap2, t_ecef_colmap2 = load_sim3(sim3_t2_path)
 
