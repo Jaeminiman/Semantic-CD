@@ -4,7 +4,7 @@
 
 init_settings:
   input_type: 'image'  # 'video' or 'image'
-  input_dir: ./data/3D_Segmentation/earthwork/06_20210407_seongnam/1_raw_data/100_0014
+  input_dir: ./data/3D_Segmentation/earthwork/06_20210407_seongnam/1_raw_data
   base_workspace_dir: ./workspace/3D_segmentation_earthwork/06_20210407_seongnam
   trial_num: 'trial1'
   image_size: null  # Set to null to maintain original size, e.g., [1280, 720]
