@@ -665,24 +665,28 @@ def convert_to_decimal(gps_coord, ref):
 
 
 def generate_geo_registration_txt(image_dir: Path, output_dir: Path) -> None:
-    """Iterate over image files in the folder, rename them sequentially, and write GPS data in ECEF format to a text file."""
+    """Iterate over image files in the folder, rename them sequentially, 
+    and write GPS data in ECEF format to a text file.
+    Supports JPG and PNG images.
+    """
     
-    image_files = sorted([f for f in image_dir.iterdir() if f.suffix.lower() == ".jpg"])
+    # 확장자 필터: jpg, png
+    exts = {".jpg", ".jpeg", ".png"}
+    image_files = sorted([f for f in image_dir.iterdir() if f.suffix.lower() in exts])
 
     with open(str(output_dir / "geo-registration-list.txt"), 'w') as f:
-        for i, file_name in enumerate(image_files):
-            # Generate new file name
-            new_file_name = f"frame_{i+1:05d}.jpg"
-            old_file_path = image_dir / file_name
+        for i, file_path in enumerate(image_files):
+            # Generate new file name (확장자 유지)
+            new_file_name = f"frame_{i+1:05d}{file_path.suffix.lower()}"
             
             # Extract GPS data
-            lat, lon, alt = extract_gps_from_exif(old_file_path)
+            lat, lon, alt = extract_gps_from_exif(file_path)
             
             if lat is not None and lon is not None:
-                # Convert to ECEF (already adapted to model_aligner)                
+                # Write only the new file name, not full path
                 f.write(f"{new_file_name} {lat:.6f} {lon:.6f} {alt:.6f}\n")
             else:
-                print(f"No GPS data found for {file_name}")
+                print(f"No GPS data found for {file_path.name}")
 
 
 def geo_registration(image_dir: Path, ns_processed_dir: Path, colmap_model_path: str, ransac_thr: float):
