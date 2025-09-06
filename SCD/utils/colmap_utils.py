@@ -707,7 +707,7 @@ def geo_registration(image_dir: Path, ns_processed_dir: Path, colmap_model_path:
         "--ref_is_gps", "1",
         "--alignment_type", "ecef",
         "--transform_path", str(absolute_colmap_model_path / "sim3_transform.json"),
-        "--alignment_max_error", str(ransac_thr)
+        # "--alignment_max_error", str(ransac_thr)
     ]
 
     run_command(colmap_command)
