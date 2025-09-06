@@ -701,6 +701,8 @@ def geo_registration(image_dir: Path, ns_processed_dir: Path, colmap_model_path:
 
     colmap_command = [
         "colmap", "model_aligner",
+        "--log_to_stderr", "1", 
+        "--log_level", "0",
         "--input_path", str(absolute_default_colmap_path),
         "--output_path", str(absolute_colmap_model_path),
         "--ref_images_path", str(absolute_colmap_model_path / "geo-registration-list.txt"),
